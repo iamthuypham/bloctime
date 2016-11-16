@@ -1,6 +1,6 @@
 <section class="dashboard clearfix">
   <div class="control" ng-controller="ButtonCtrl as button">
-    <div class="timer">25:00</div>
+    <div class="time-tracker" ng-bind="button.timer.currentTimeString"></div>
     <a class="button" ng-class="{green: toGreen, red: toRed}">
       <i class="fa fa-hourglass-start" aria-hidden="true" ng-show="!button.timer.running" ng-click="button.timer.start(); toRed = true; toGreen = false">
       </i>
