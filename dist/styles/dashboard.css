@@ -11,6 +11,7 @@
   font-family: "Nunito", sans-serif;
   text-align: center;
   vertical-align: middle;
+  height: 50%;
 }
 
 .timer {
@@ -21,15 +22,26 @@
 .button {
   /*position*/
   display: inline-block;
+  margin-top: 5%;
   height: 200px;
   width: 200px;
   line-height: 200px;
   white-space: nowrap;
   /*outlook*/
-  border: 5px solid #b4e599;
   border-radius: 50%;
-  background-color: #6bce02;
+  border: 5px solid #b4e599;
+  background-color: #4ddb00;
   /*content*/
   font-size: 3rem;
   color: white;
+}
+/*green class added when clicked*/
+.green {
+  border-color: #b4e599;
+  background-color: #4ddb00;
+}
+/*red class added when clicked*/
+.red {
+  border-color: #ef957a;
+  background-color: #ff3b00;
 }

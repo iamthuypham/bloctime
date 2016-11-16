@@ -1,6 +1,10 @@
 <section class="dashboard clearfix">
-  <div class="control">
+  <div class="control" ng-controller="ButtonCtrl as button">
     <div class="timer">25:00</div>
-    <div class="button"><i class="fa fa-hourglass-start" aria-hidden="true"></i></div>
-  </div>
+    <a class="button" ng-class="{green: toGreen, red: toRed}">
+      <i class="fa fa-hourglass-start" aria-hidden="true" ng-show="!button.timer.running" ng-click="button.timer.start(); toRed = true; toGreen = false">
+      </i>
+      <i class="fa fa-stop" aria-hidden="true" ng-show="button.timer.running" ng-click="button.timer.stop(); toRed = false; toGreen = true">
+      </i>
+    </a>
 </section>
