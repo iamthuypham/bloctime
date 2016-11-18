@@ -35,11 +35,7 @@
   font-size: 3rem;
   color: white;
 }
-/*green class added when clicked*/
-.green {
-  border-color: #b4e599;
-  background-color: #4ddb00;
-}
+
 /*red class added when clicked*/
 .red {
   border-color: #ef957a;

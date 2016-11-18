@@ -26,6 +26,7 @@
       //Cancel the Timer.
       if (angular.isDefined(Timer.Tracker)) {
         $interval.cancel(Timer.Tracker);
+        $rootScope.$broadcast('timerStop');
         Timer.currentTimeString = '25:00';
       }
     };
