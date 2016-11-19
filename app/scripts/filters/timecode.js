@@ -3,11 +3,16 @@
     return function(seconds) {
       var seconds = Number.parseFloat(seconds);
       if (Number.isNaN(seconds)) {
-        return '-:--';
+        return '--:--';
       }
       var wholeSeconds = Math.floor(seconds);
       var minutes = Math.floor(wholeSeconds / 60);
       var remainingSeconds = wholeSeconds % 60;
+      
+      if (minutes < 10) {
+        minutes += '0';
+      }
+      
       var output = minutes + ':';
 
       if (remainingSeconds < 10) {

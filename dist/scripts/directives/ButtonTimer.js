@@ -27,9 +27,6 @@
          * @desc 1) display reset button 2) display decrement time
          */
         var startTimer = function(time) {
-          setUIButton(true, true) //change to red stop icon
-          scope.currentTime = time; //in second
-        
           scope.counter = $interval(function() {
             if (scope.currentTime === 0) {
               finishTimer(time);
@@ -37,7 +34,8 @@
             var str = $filter('timecode')(scope.currentTime--); //timecode filter return a time in string
             scope.currentTimeString = str;
           }, 1000);
-          
+          setUIButton(true, true) //change to red stop icon
+          scope.currentTime = time; //in second
         };
         /**
          * @function finishTimer
@@ -73,7 +71,7 @@
          */
         scope.start = function() {
           if (!scope.onBreak) {
-            startTimer(20);
+            startTimer(19);
           }
           else if (scope.onBreak) {
             startTimer(scope.currentTime);
