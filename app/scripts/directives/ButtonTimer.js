@@ -6,7 +6,8 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
-        //@var for button color 
+        //@var for button icon and color
+        scope.running = false;
         scope.toRed = false;
         //@var for counting time
         scope.onBreak = false;
@@ -14,15 +15,21 @@
         scope.currentTime = null;
         scope.currentTimeString = '00:20';
         /**
+         * @function setUIButton
+         * @desc declare green glass icon or red stop icon with true/false value
+         */
+        var setUIButton = function(glassIcon,redColor) {
+          scope.running = glassIcon;
+          scope.toRed = redColor;
+        }
+        /**
          * @function start
          * @desc 1) display reset button 2) display decrement time
          */
         var startTimer = function(time) {
-          scope.running = true;
-          scope.toRed = true; //change button color to red
+          setUIButton(true, true) //change to red stop icon
           scope.currentTime = time; //in second
-          
-
+        
           scope.counter = $interval(function() {
             if (scope.currentTime === 0) {
               finishTimer(time);
@@ -48,10 +55,10 @@
         };
         /**
          * @function stopTimer
-         * @desc 1) display start button 2) stop the decrement 3) reset time to default 25 min
+         * @desc 1) display start button 2) stop the decrement 3) reset time 
          */
         var stopTimer = function(time) {
-          scope.running = false;
+          setUIButton(false, false) //change to green glass icon
           scope.currentTime = time;
           //Cancel the time-tracker.
           if (angular.isDefined(scope.counter)) {
@@ -59,7 +66,6 @@
           }
           var str = $filter('timecode')(scope.currentTime);
           scope.currentTimeString = str;
-          scope.toRed = false;
         };
         /**
          * @function start
