@@ -16,6 +16,13 @@
         scope.currentTimeString = '00:07';
         //@var for counting number of completed work sessions
         scope.numSession = 0;
+        //@var for sound
+        var ding = new buzz.sound("/assets/sounds/ding.mp3", {
+          preload: true
+        });
+        var click = new buzz.sound("/assets/sounds/mouse_click.mp3", {
+          preload: true
+        });
         /**
          * @function setUIButton
          * @desc declare green glass icon or red stop icon with true/false value
@@ -25,8 +32,8 @@
           scope.toRed = redColor;
         };
         /**
-         * @function setUIButton
-         * @desc declare green glass icon or red stop icon with true/false value
+         * @function setUITimer
+         * @desc 1) use filter to display minutes to --:-- 2) set current time to a string
          */
         var setUITimer = function(time) {
           scope.currentTimeString = $filter('timecode')(time); //timecode filter return a time in string
@@ -37,12 +44,24 @@
          */
         var startTimer = function(time) {
           scope.counter = $interval(function() {
-            if (scope.currentTime < 0) {
-              finishSession(time);
-            }
+            // if (scope.currentTime < 0) {
+
+            // }
             var decr = scope.currentTime--;
             setUITimer(decr);
           }, 1000);
+          /**
+           * @watcher check currentTime when reaching 0
+           * @desc 1) call finishSession func 2) play Ding sounds
+           */
+          scope.$watch('currentTime', function(newVal, oldVal) {
+            if (!newVal) return;
+            if (newVal < 0) {
+              finishSession(time);
+              console.log("Ding!!!")
+              ding.play();
+            }
+          });
           setUIButton(true, true); //change to red stop icon
           scope.currentTime = time; //in second
         };
@@ -79,12 +98,13 @@
          * @desc 1) display start button 2) stop the decrement 3) reset time 
          */
         var stopTimer = function(time) {
+          scope.currentTime = time; //if you want to pause instead of reset to 0, comment out this line and setUITimer(scope.currentTime)
           setUIButton(false, false) //change to green glass icon
             //Cancel the time-tracker.
           if (angular.isDefined(scope.counter)) {
             $interval.cancel(scope.counter);
           }
-          setUITimer(scope.currentTime);
+          setUITimer(time);
         };
         /**
          * @function start
@@ -99,12 +119,12 @@
           }
         };
         /**
-         * @function start
-         * @desc To be called in dashboard view when reset button is clicked
+         * @function stop
+         * @desc To be called in dashboard view when stop button is clicked
          */
         scope.stop = function() {
           stopTimer(7);
-        }
+        };
 
       }
     }
