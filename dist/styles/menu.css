@@ -1,0 +1,24 @@
+.menu {
+  /*position*/
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /*outlook*/
+  width: 100%;
+  height: 70%;
+  /*content*/
+}
+
+.setting {
+  /*outlook*/
+  height: 100%;
+  background-color: black;
+  opacity: 0.8;
+  border-bottom: 3px solid #333333; 
+}
+
+.setting-button {
+  /*outlook*/
+  height: 7%;
+}

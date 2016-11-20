@@ -8,10 +8,10 @@
      });
      //add state to direct to correct template
      $stateProvider
-      .state('dashboard', {
+      .state('main', {
               url: '/',
               // controller: 'LandingCtrl as landing',
-              templateUrl: 'templates/dashboard.html'
+              templateUrl: 'templates/main.html'
             })
    }
 

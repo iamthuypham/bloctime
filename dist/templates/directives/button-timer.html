@@ -1,9 +1,9 @@
 <div class="control">
   <div class="time-tracker" ng-bind="currentTimeString"></div>
   <a class="button" ng-class="{red: toRed}">
-    <i class="fa fa-hourglass-start" aria-hidden="true" ng-show="!running" ng-click="start()" >
+    <i class="fa fa-hourglass-start" aria-hidden="true" ng-show="!running" ng-mouseup="start()" >
     </i>
-    <i class="fa fa-stop" aria-hidden="true" ng-show="running" ng-click="stop()">
+    <i class="fa fa-stop" aria-hidden="true" ng-show="running" ng-mouseclick="stop()">
     </i>
   </a>
 </div>
