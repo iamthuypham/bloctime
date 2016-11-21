@@ -2,14 +2,17 @@
   <div class="task">
     <table class="task-list">
       <tr>
-        <form name="taskForm">
+        <td>
           <input type="text" placeholder="What is your next task?" ng-model="task.name">
-          <input type="submit" ng-click="updateTask(task)" value="Save" />
-        </form>
+        </td>
+        <td type="submit" ng-click="updateTask(task)" value="Save">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </td>
+
       </tr>
       <tr ng-repeat="task in taskList">
         <td>{{ task.name }}</td>
-        <td><button ng-click="removeTask($index)">Remove task</button></td>
+        <td ng-click="removeTask($index)"><i class="fa fa-times" aria-hidden="true"></i></td>
       </tr>
     </table>
   </div>
