@@ -25,7 +25,7 @@
         * @desc 1) remove a task using its index
         */
         scope.removeTask = function(task) {
-          scope.taskList.splice(scope.taskList.indexOf(task),1);
+          Tasks.all.$remove(scope.taskList.indexOf(task));
         }
 
       }
