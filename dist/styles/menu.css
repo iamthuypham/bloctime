@@ -11,6 +11,20 @@
   /*content*/
 }
 
+/*sliding animation for menu*/
+.slideDown-add, .slideDown-remove {
+  transition: all cubic-bezier(0.250, 0.60, 0.450, 0.940) 1s;
+}
+
+.slideDown,
+.slideDown-add.slideDown-add-active {
+  top: 0%;
+}
+
+.slideDown-remove.slideDown-remove-active {
+  top: -100%;
+}
+
 task-setting {
   /*outlook*/
   height: 100%;
@@ -56,17 +70,4 @@ td{
 .task-setting-button {
   /*outlook*/
   height: 6%;
-}
-
-.slideDown-add, .slideDown-remove {
-  transition: all cubic-bezier(0.250, 0.60, 0.450, 0.940) 1s;
-}
-
-.slideDown,
-.slideDown-add.slideDown-add-active {
-  top: 0%;
-}
-
-.slideDown-remove.slideDown-remove-active {
-  top: -100%;
 }
