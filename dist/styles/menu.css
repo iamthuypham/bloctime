@@ -40,6 +40,7 @@ input[type=text] {
   background-color: black;
   border: none;
   outline: none;
+  width: 100%;
   /*content*/
   color:white;
   font-size: 1rem;

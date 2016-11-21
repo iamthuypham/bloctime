@@ -10,9 +10,9 @@
         </td>
 
       </tr>
-      <tr ng-repeat="task in taskList">
+      <tr ng-repeat="task in taskList | orderBy:'-'" ng-click="removeTask(task)">
         <td>{{ task.name }}</td>
-        <td ng-click="removeTask($index)"><i class="fa fa-times" aria-hidden="true"></i></td>
+        <td><i class="fa fa-times" aria-hidden="true"></i></td>
       </tr>
     </table>
   </div>
