@@ -12,6 +12,7 @@
    margin: 0;
    padding: 0;
    text-align: center;
+   overflow: hidden;
  }
  
  /* Medium and small screens (640px) */

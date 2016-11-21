@@ -1,12 +1,13 @@
 .menu {
   /*position*/
   position: absolute;
+  top: -100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   /*outlook*/
   width: 100%;
-  height: 70%;
+  height: 105%;
   /*content*/
 }
 
@@ -48,11 +49,24 @@ td{
   color: #ff3b00;
 }
 
-i:hover {
+.fa-plus:hover, .fa-times:hover {
   color: white;
 }
 
 .task-setting-button {
   /*outlook*/
-  height: 7%;
+  height: 6%;
+}
+
+.slideDown-add, .slideDown-remove {
+  transition: all cubic-bezier(0.250, 0.60, 0.450, 0.940) 1s;
+}
+
+.slideDown,
+.slideDown-add.slideDown-add-active {
+  top: 0%;
+}
+
+.slideDown-remove.slideDown-remove-active {
+  top: -100%;
 }
