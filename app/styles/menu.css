@@ -10,15 +10,16 @@
   /*content*/
 }
 
-.setting {
+task-setting {
   /*outlook*/
   height: 100%;
   background-color: black;
-  opacity: 0.8;
+  opacity: 0.9;
   border-bottom: 3px solid #333333;
+  color: white;
 }
 
-.setting-button {
+.task-setting-button {
   /*outlook*/
   height: 7%;
 }
@@ -37,3 +38,7 @@ input[type=text] {
   font-size: 1rem;
   font-family: "Nunito", sans-serif;
 }
+
+/*.taskList > pre {*/
+  
+/*}*/

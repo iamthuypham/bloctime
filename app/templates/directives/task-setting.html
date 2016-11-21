@@ -1,0 +1,20 @@
+<div class="task-setting">
+  <div class="task">
+    <table class="task-list">
+      <tr>
+        <form name="taskForm">
+          <input type="text" placeholder="What is your next task?" ng-model="task.name">
+          <input type="submit" ng-click="updateTask(task)" value="Save" />
+        </form>
+      </tr>
+      <tr ng-repeat="task in taskList">
+        <td>{{ task.name }}</td>
+        <td><button ng-click="removeTask($index)">Remove task</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="setting">
+
+  </div>
+</div>
