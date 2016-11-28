@@ -8,7 +8,6 @@
         <td type="submit" ng-click="updateTask(task)" value="Save">
           <i class="fa fa-plus" aria-hidden="true"></i>
         </td>
-
       </tr>
       <tr ng-repeat="task in taskList | orderBy:'-'">
         <td>{{ task.name }}</td>
@@ -16,8 +15,36 @@
       </tr>
     </table>
   </div>
-
   <div class="setting">
-
+    <table class="setting-list">
+      <tr>
+        <div class="setting-title">__ minutes per session</div>
+        <div class="seek-bar" ng-click="setSessionLength($event)">
+          <div class="fill" ng-style="fillStyle()"></div>
+          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
+        </div>
+      </tr>
+      <tr>
+        <div class="setting-title">__ minutes per regular break</div>
+        <div class="seek-bar" ng-click="setSessionLength($event)">
+          <div class="fill" ng-style="fillStyle()"></div>
+          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
+        </div>
+      </tr>
+      <tr>
+        <div class="setting-title">Take long break after __ sessions</div>
+        <div class="seek-bar" ng-click="setSessionLength($event)">
+          <div class="fill" ng-style="fillStyle()"></div>
+          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
+        </div>
+      </tr>
+      <tr>
+        <div class="setting-title">__ minutes per long break</div>
+        <div class="seek-bar" ng-click="setSessionLength($event)">
+          <div class="fill" ng-style="fillStyle()"></div>
+          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
+        </div>
+      </tr>
+    </table>
   </div>
 </div>

@@ -1,10 +1,9 @@
   // Initialize the Firebase SDK
   var config = {
-    apiKey: "AIzaSyDcoWMKakJ9M5PhTi1EfrVtMmnXXh61Tho",
-    authDomain: "bloctime-39afe.firebaseapp.com",
-    databaseURL: "https://bloctime-39afe.firebaseio.com",
-    storageBucket: "bloctime-39afe.appspot.com",
-    messagingSenderId: "528864693325"
+    apiKey: "AIzaSyAKYsV9DLqssGnvg0H8dKBEWkaxhmZC3gA",
+    authDomain: "bloc-chat-b8819.firebaseapp.com",
+    databaseURL: "https://bloc-chat-b8819.firebaseio.com",
+    storageBucket: "",
+    messagingSenderId: "314512890756"
   };
   firebase.initializeApp(config);
-  
