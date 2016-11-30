@@ -9,6 +9,8 @@
         //@var for tasks array
         var taskArray = Tasks.all;
         scope.taskList = taskArray;
+        //@var active task
+        scope.activeTask = null;
         /**
          * @func updateTask
          * @desc 1) read user input 2) write to database 3)reset input field to default
@@ -26,6 +28,17 @@
          */
         scope.removeTask = function(task) {
           Tasks.all.$remove(scope.taskList.indexOf(task));
+        };
+        /**
+         * @func activateTask
+         * @desc 1) make a task active
+         */
+        scope.activate = function(task) {
+          scope.taskList.forEach(function(element) {
+            element.active = false;
+          })//set all tasks to non-active
+          task.active = true; //set clicked task to active
+          scope.activeTask = task;
         };
         /**
          * @var default Timer Setup

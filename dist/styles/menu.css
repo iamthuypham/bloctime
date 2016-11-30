@@ -74,6 +74,9 @@ td {
 .fa-times {
   color: #ff3b00;
 }
+.fa-star{
+  color: #ffe100;
+}
 
 .fa-plus:hover, .fa-times:hover {
   color: white;
