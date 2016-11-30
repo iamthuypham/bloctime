@@ -46,7 +46,7 @@ task-setting {
   height: 60%;
 }
 
-input[type=text] {
+input {
   /*outlook*/
   background-color: black;
   border: none;
@@ -87,11 +87,23 @@ td {
 .setting {
   height: 40%;
   border-top: 1px dashed #333333;
-  padding-top: 10px;
+  margin: 0 auto;
+  padding: 15px 0;
 }
-.setting-title {
-  margin-top: 10px;
-  padding: 10px 0;
+.setting-item {
+  padding: 7px 0;
+}
+.setting input {
+  border: 1px dashed #515151;
+  border-radius: 3px;
+  width: 50px;
+  margin: 0 3px;
+  padding: 3px 5px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 .seek-bar {
   height: 0.25rem;
@@ -99,8 +111,8 @@ td {
   border-radius: 2px;
   position: relative;
   cursor: pointer;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  
 }
 
 .seek-bar .fill {

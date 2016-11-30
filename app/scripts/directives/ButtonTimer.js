@@ -6,14 +6,19 @@
       restrict: 'E',
       scope: {},
       link: function(scope, element, attributes) {
+        //@var for configuration
+        scope.workingLength = 25 * 60;
+        scope.regBreakLength = 5 * 60;
+        scope.longBreakLength = 15 * 60;
+        scope.workNum = 2;
         //@var for button icon and color
         scope.running = false;
         scope.toRed = false;
         //@var for counting down time
         scope.onBreak = false;
         scope.counter = null;
-        scope.currentTime = null;
-        scope.currentTimeString = '00:07';
+        scope.currentTime = scope.workingLength;
+        scope.currentTimeString = '25:00';
         //@var for counting number of completed work sessions
         scope.numSession = 0;
         //@var for sound
@@ -43,10 +48,8 @@
          * @desc 1) display reset button 2) display decrement time
          */
         var startTimer = function(time) {
+          scope.time = time;//assigned to scope.time so that can be used in scope.$watch
           scope.counter = $interval(function() {
-            // if (scope.currentTime < 0) {
-
-            // }
             var decr = scope.currentTime--;
             setUITimer(decr);
           }, 1000);
@@ -57,7 +60,8 @@
           scope.$watch('currentTime', function(newVal, oldVal) {
             if (!newVal) return;
             if (newVal < 0) {
-              finishSession(time);
+              console.log(scope.time)
+              finishSession(scope.time);
               console.log("Ding!!!")
               ding.play();
             }
@@ -70,14 +74,14 @@
          * @desc when user successfully complete a session. 1) stopTimer 2) set onBreak value to true
          */
         var finishSession = function(time) {
-          if (time === 7) {
+          if (time === scope.workingLength) {
             scope.onBreak = true;
-            scope.currentTime = 5;
+            scope.currentTime = scope.regBreakLength;
             finishNumSession(time);
           }
           else {
             scope.onBreak = false;
-            scope.currentTime = 7;
+            scope.currentTime = scope.workingLength;
           }
           stopTimer(scope.currentTime);
         };
@@ -88,8 +92,8 @@
          */
         var finishNumSession = function() {
           scope.numSession += 1;
-          if (scope.numSession % 4 === 0 && scope.numSession > 0) {
-            scope.currentTime = 7;
+          if (scope.numSession % scope.workNum === 0 && scope.numSession > 0) {
+            scope.currentTime = scope.longBreakLength;
             setUITimer(scope.currentTime);
           }
         };
@@ -112,7 +116,7 @@
          */
         scope.start = function() {
           if (!scope.onBreak) {
-            startTimer(7);
+            startTimer(scope.workingLength);
           }
           else if (scope.onBreak) {
             startTimer(scope.currentTime);
@@ -123,9 +127,33 @@
          * @desc To be called in dashboard view when stop button is clicked
          */
         scope.stop = function() {
-          stopTimer(7);
+          stopTimer(scope.workingLength);
         };
-
+        /**
+         * @function applySetting
+         * @desc 1)
+         */
+        scope.applySetting = function(type, value) {
+          switch (type) {
+            case 'Length of a Working Session':
+              scope.workingLength = value * 60;
+              scope.currentTime = value * 60; //convert minutes to seconds
+              setUITimer(scope.workingLength);
+              break;
+            case 'Length of a Regular Break':
+              scope.regBreakLength = value * 60;
+              break;
+            case 'Number of Working Session for a Break':
+              scope.workNum = value;
+              break;
+            case 'Length of a Long Break Session':
+              scope.longBreakLength = value * 60;
+              break;
+          }
+        };
+        scope.$on('applySetting', function(event, arg) {
+          scope.applySetting(arg.type, arg.value);
+        })
       }
     }
   }

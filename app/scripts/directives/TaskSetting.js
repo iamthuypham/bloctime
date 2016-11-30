@@ -1,20 +1,10 @@
 (function() {
 
-  function TaskSetting(Tasks, $document) {
-    var calculatePercent = function(seekBar, event) {
-      var offsetX = event.pageX - seekBar.offset().left;
-      var seekBarWidth = seekBar.width();
-      var offsetXPercent = offsetX / seekBarWidth;
-      offsetXPercent = Math.max(0, offsetXPercent);
-      offsetXPercent = Math.min(1, offsetXPercent);
-      return offsetXPercent;
-    };
+  function TaskSetting(Tasks, $rootScope) {
     return {
       templateUrl: '/templates/directives/task-setting.html',
       restrict: 'E',
-      scope: {
-        onChange: '&' //'&' is one type of directive scope bindings, execute an expression in the context of the parent scope
-      },
+      scope: {},
       link: function(scope, element, attributes) {
         //@var for tasks array
         var taskArray = Tasks.all;
@@ -37,100 +27,47 @@
         scope.removeTask = function(task) {
           Tasks.all.$remove(scope.taskList.indexOf(task));
         };
-        
-        
-        
-        scope.value = 0;
-        scope.max = 100;
-
-        var seekBar = $(element);
-
-        attributes.$observe('value', function(newValue) {
-          scope.value = newValue;
-        });
-
-        attributes.$observe('max', function(newValue) {
-          scope.max = newValue;
-        });
-
-        var percentString = function() {
-          var value = scope.value;
-          var max = scope.max;
-          var percent = value / max * 100;
-          return percent + "%";
-        };
         /**
-         * @func fillStyle
-         * @desc update the style of fill bar
-         * @param {Object}
+         * @var default Timer Setup
          */
-        scope.fillStyle = function() {
-          return {
-            width: percentString()
-          };
-        };
+        scope.workLength = 25;
+        scope.regBreakLength = 5;
+        scope.workNum = 2;
+        scope.longBreakLength = 15;
         /**
-         * @func thumbStyle
-         * @desc update the style of thumb
-         * @param {Object}
+         * @func configure Timer parameter
+         * @desc 1) evaluate user input 2) apply settings if pass evaluation 3) return default value if not pass
          */
-        scope.thumbStyle = function() {
-          return {
-            left: percentString()
-          };
-        };
-        /**
-         * @func onClickSeekBar
-         * @desc call the calculatePercent and update value of the seek bar
-         * @param {Object}
-         */
-        scope.setSessionLength = function(event) {
-          var percent = calculatePercent(seekBar, event);
-          scope.value = percent * scope.max;
-          notifyOnChange(scope.value);
-        };
-        /**
-         * @func trackThum
-         * @desc binding the thumb with document, call calculatePercent, update the value when dragging thumb
-         * @param {Object}
-         */
-        scope.trackThumb = function() {
-          $document.bind('mousemove.thumb', function(event) {
-            var percent = calculatePercent(seekBar, event);
-            scope.$apply(function() {
-              scope.value = percent * scope.max;
-              notifyOnChange(scope.value);
-            });
-          });
-          $document.bind('mouseup.thumb', function() {
-            $document.unbind('mousemove.thumb');
-            $document.unbind('mouseup.thumb');
-          });
-        };
-        /**
-         * @func notifyOnChange
-         * @desc notify onChange that scope.value has changed
-         * @param {Object} newValue
-         */
-        var notifyOnChange = function(NewValue) {
-          if (typeof scope.onChange === 'function') {
-            scope.onChange({
-              value: NewValue
-            });
+        scope.configTimer = function(val, event) {
+          var max = event.target.attributes['max'].value
+          var min = event.target.attributes['min'].value
+          var valueType = event.target.attributes['name'].value
+          scope.value = angular.copy(val)
+          console.log(scope.value)
+          if (scope.value > min && scope.value <= max) {
+            $rootScope.$broadcast('applySetting', {
+              value: scope.value,
+              type: valueType
+            })
+          }
+          else {
+            switch (valueType) {
+              case 'Length of a Working Session':
+                scope.workLength = 25;
+                break;
+              case 'Length of a Regular Break':
+                scope.regBreakLength = 5;
+                break;
+              case 'Number of Working Session for a Break':
+                scope.workNum = 2;
+                break;
+              case 'Length of a Long Break Session':
+                scope.longBreakLength = 15;
+                break;
+            }
+            alert(valueType + " should be from " + min + " to " + max)
           }
         };
-        /**
-         * @func setSessionLength
-         * @desc 1) get user input 2) the length will be assigned to currentTimeString for ButtonTimer
-         */
-        // scope.setSessionLength = function(length) {
-        //   if (length) {
-        //     return length;
-        //   }
-        // };
-        // scope.$on('setSessionLength', function() {
-        //   scope.setSessionLength();
-        // });
 
       }
     };

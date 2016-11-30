@@ -16,35 +16,9 @@
     </table>
   </div>
   <div class="setting">
-    <table class="setting-list">
-      <tr>
-        <div class="setting-title">__ minutes per session</div>
-        <div class="seek-bar" ng-click="setSessionLength($event)">
-          <div class="fill" ng-style="fillStyle()"></div>
-          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
-        </div>
-      </tr>
-      <tr>
-        <div class="setting-title">__ minutes per regular break</div>
-        <div class="seek-bar" ng-click="setSessionLength($event)">
-          <div class="fill" ng-style="fillStyle()"></div>
-          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
-        </div>
-      </tr>
-      <tr>
-        <div class="setting-title">Take long break after __ sessions</div>
-        <div class="seek-bar" ng-click="setSessionLength($event)">
-          <div class="fill" ng-style="fillStyle()"></div>
-          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
-        </div>
-      </tr>
-      <tr>
-        <div class="setting-title">__ minutes per long break</div>
-        <div class="seek-bar" ng-click="setSessionLength($event)">
-          <div class="fill" ng-style="fillStyle()"></div>
-          <div class="thumb" ng-mousedown="trackThumb()" ng-style="thumbStyle()"></div>
-        </div>
-      </tr>
-    </table>
+    <div class="setting-item"><input name="Length of a Working Session" type="number" min="0" max="90" ng-blur="configTimer(workLength, $event)" ng-model="workLength">  minutes per session</div>
+    <div class="setting-item"><input name="Length of a Regular Break" type="number" min="0" max="60" ng-blur="configTimer(regBreakLength, $event)" ng-model="regBreakLength"> minutes per regular break</div>
+    <div class="setting-item">Take long break after <input name="Number of Working Session for a Break" type="number" min="1" max="10" ng-blur="configTimer(workNum, $event)" ng-model="workNum"> sessions</div>
+    <div class="setting-item"><input name="Length of a Long Break Session" type="number" min="0" max="60" ng-blur="configTimer(longBreakLength, $event)" ng-model="longBreakLength"> minutes per long break</div>
   </div>
 </div>
