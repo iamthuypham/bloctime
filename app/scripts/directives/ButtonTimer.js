@@ -28,6 +28,8 @@
         var click = new buzz.sound("/assets/sounds/mouse_click.mp3", {
           preload: true
         });
+        //@var for recording task's time
+        var by
         /**
          * @function setUIButton
          * @desc declare green glass icon or red stop icon with true/false value
@@ -154,6 +156,13 @@
         scope.$on('applySetting', function(event, arg) {
           scope.applySetting(arg.type, arg.value);
         })
+        /**
+         * @function writeToTask
+         * @desc 1)
+         */
+        var writeToTask = function() {
+          
+        }
       }
     }
   }
