@@ -9,13 +9,18 @@
         //@var for tasks array
         var taskArray = Tasks.all;
         scope.taskList = taskArray;
-        //@var active task
-        scope.activeTask = null;
+        // @var default Timer Setup
+        scope.workLength = 25;
+        scope.regBreakLength = 5;
+        scope.workNum = 2;
+        scope.longBreakLength = 15;
+        
         /**
          * @func updateTask
          * @desc 1) read user input 2) write to database 3)reset input field to default
          */
         scope.updateTask = function(task) {
+          task.amount = 0;
           if (scope.task) {
             scope.task = angular.copy(task);
             taskArray.$add(scope.task);
@@ -30,23 +35,32 @@
           Tasks.all.$remove(scope.taskList.indexOf(task));
         };
         /**
-         * @func activateTask
-         * @desc 1) make a task active
+         * @func saveToDb
+         * @desc update active status for each task to db
          */
-        scope.activate = function(task) {
-          scope.taskList.forEach(function(element) {
-            element.active = false;
-          })//set all tasks to non-active
-          task.active = true; //set clicked task to active
-          scope.activeTask = task;
+        var saveToDb = function(task) {
+          var taskIndex = scope.taskList.indexOf(task)
+          Tasks.all.$save(taskIndex).then(function(ref) {
+            ref.key === Tasks.all[taskIndex].$id;
+          }, function(error) {
+            console.log("Saving Element Error:", error);
+          });
         };
         /**
-         * @var default Timer Setup
+         * @func activateTask
+         * @desc make a task active
          */
-        scope.workLength = 25;
-        scope.regBreakLength = 5;
-        scope.workNum = 2;
-        scope.longBreakLength = 15;
+        scope.activate = function(task) {
+          Tasks.all.forEach(function(element) {
+            element.active = false; //Change status to false for all element first
+            saveToDb(element); //Save value to Firebase
+          });
+          //Then change status to true for the chosen task
+          task.active = true;
+          saveToDb(task)
+        };
+        
+        
         /**
          * @func configure Timer parameter
          * @desc 1) evaluate user input 2) apply settings if pass evaluation 3) return default value if not pass
@@ -81,7 +95,21 @@
             alert(valueType + " should be from " + min + " to " + max)
           }
         };
-
+        console.log(Tasks.all)
+        /**
+         * @func writeToDatabase
+         * @desc write amount of time to Firebase. This func is broadcast by Timer (ButtonTimer.js)
+         */
+        scope.writeTimeToDb = function(seconds) {
+          var currentAmount = Tasks.getAmountActiveTask()
+          currentAmount += seconds
+          Tasks.write(currentAmount)
+          // saveToDb(scope.activeTask);
+          console.log(Tasks.all)
+        }
+        scope.$on('writeTimeToDb', function(event, arg) {
+          scope.writeTimeToDb(arg.sec);
+        })
       }
     };
   }

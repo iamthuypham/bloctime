@@ -1,6 +1,6 @@
 (function() {
 
-  function ButtonTimer($rootScope, $interval, $filter) {
+  function ButtonTimer($rootScope, $interval, $filter, Tasks) {
     return {
       templateUrl: '/templates/directives/button-timer.html',
       restrict: 'E',
@@ -60,7 +60,6 @@
           scope.$watch('currentTime', function(newVal, oldVal) {
             if (!newVal) return;
             if (newVal < 0) {
-              console.log(scope.time)
               finishSession(scope.time);
               console.log("Ding!!!")
               ding.play();
@@ -83,7 +82,7 @@
             scope.onBreak = false;
             scope.currentTime = scope.workingLength;
           }
-          stopTimer(scope.currentTime);
+          stopTimer(scope.currentTime, false);
         };
         /**
          * @function finishNumSession
@@ -101,7 +100,7 @@
          * @function stopTimer
          * @desc 1) display start button 2) stop the decrement 3) reset time 
          */
-        var stopTimer = function(time) {
+        var stopTimer = function(time, stopByUser) {
           scope.currentTime = time; //if you want to pause instead of reset to 0, comment out this line and setUITimer(scope.currentTime)
           setUIButton(false, false) //change to green glass icon
             //Cancel the time-tracker.
@@ -109,6 +108,9 @@
             $interval.cancel(scope.counter);
           }
           setUITimer(time);
+          if (stopByUser === false) {
+            recordTime();
+          }
         };
         /**
          * @function start
@@ -127,7 +129,7 @@
          * @desc To be called in dashboard view when stop button is clicked
          */
         scope.stop = function() {
-          stopTimer(scope.workingLength);
+          stopTimer(scope.workingLength, true);
         };
         /**
          * @function applySetting
@@ -154,6 +156,13 @@
         scope.$on('applySetting', function(event, arg) {
           scope.applySetting(arg.type, arg.value);
         })
+        /**
+         * @function writeToTask
+         * @desc 1)
+         */
+        var recordTime = function() {
+          $rootScope.$broadcast('writeTimeToDb', {sec: scope.workingLength})
+        }
       }
     }
   }

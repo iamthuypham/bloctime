@@ -6,13 +6,15 @@
           <input type="text" placeholder="What is your next task?" ng-model="task.name">
         </td>
         <td></td>
+        <td></td>
         <td type="submit" ng-click="updateTask(task)" value="Save">
           <i class="fa fa-plus" aria-hidden="true"></i>
         </td>
       </tr>
       <tr ng-repeat="task in taskList | orderBy:'-'">
         <td ng-click="activate(task)">{{ task.name }}</td>
-        <td><i ng-show="task.active" class="fa fa-star" aria-hidden="true"></i></td>
+        <td>{{task.amount / 60 | number:1}}</td>
+        <td><i ng-show="task.active" ng-model="task.active" class="fa fa-star" aria-hidden="true"></i></td>
         <td ng-click="removeTask(task)"><i class="fa fa-times" aria-hidden="true"></i></td>
       </tr>
     </table>
