@@ -8,15 +8,15 @@
      });
      //add state to direct to correct template
      $stateProvider
-      .state('landing', {
+      .state('main', {
               url: '/',
               // controller: 'LandingCtrl as landing',
-              templateUrl: 'templates/landing.html'
+              templateUrl: 'templates/main.html'
             })
    }
 
    angular
-     .module('blocTime', ['ui.router','firebase'])
+     .module('blocTime', ['ui.router','firebase', 'ngAnimate'])
      .config(config);
  })();
  

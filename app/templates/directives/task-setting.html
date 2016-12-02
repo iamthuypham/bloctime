@@ -1,0 +1,28 @@
+<div class="task-setting">
+  <div class="task">
+    <table class="task-list">
+      <tr>
+        <td>
+          <input type="text" placeholder="What is your next task?" ng-model="task.name">
+        </td>
+        <td></td>
+        <td></td>
+        <td type="submit" ng-click="updateTask(task)" value="Save">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </td>
+      </tr>
+      <tr ng-repeat="task in taskList | orderBy:'-'">
+        <td ng-click="activate(task)">{{ task.name }}</td>
+        <td>{{task.amount / 60 | number:1}}</td>
+        <td><i ng-show="task.active" ng-model="task.active" class="fa fa-star" aria-hidden="true"></i></td>
+        <td ng-click="removeTask(task)"><i class="fa fa-times" aria-hidden="true"></i></td>
+      </tr>
+    </table>
+  </div>
+  <div class="setting">
+    <div class="setting-item"><input name="Length of a Working Session" type="number" min="0" max="90" ng-blur="configTimer(workLength, $event)" ng-model="workLength">  minutes per session</div>
+    <div class="setting-item"><input name="Length of a Regular Break" type="number" min="0" max="60" ng-blur="configTimer(regBreakLength, $event)" ng-model="regBreakLength"> minutes per regular break</div>
+    <div class="setting-item">Take long break after <input name="Number of Working Session for a Break" type="number" min="1" max="10" ng-blur="configTimer(workNum, $event)" ng-model="workNum"> sessions</div>
+    <div class="setting-item"><input name="Length of a Long Break Session" type="number" min="0" max="60" ng-blur="configTimer(longBreakLength, $event)" ng-model="longBreakLength"> minutes per long break</div>
+  </div>
+</div>

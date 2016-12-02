@@ -1,0 +1,149 @@
+.menu {
+  /*position*/
+  position: absolute;
+  top: -100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /*outlook*/
+  width: 100%;
+  height: 105%;
+  /*content*/
+}
+
+/*sliding animation for menu*/
+.slideDown-add, .slideDown-remove {
+  transition: all cubic-bezier(0.250, 0.60, 0.450, 0.940) 1s;
+}
+
+.slideDown,
+.slideDown-add.slideDown-add-active {
+  top: 0%;
+}
+
+.slideDown-remove.slideDown-remove-active {
+  top: -100%;
+}
+
+task-setting {
+  /*outlook*/
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  border-bottom: 3px solid #333333;
+  color: white;
+  font-family: "Nunito", sans-serif;
+}
+
+.task-setting {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+}
+
+.task {
+  height: 60%;
+}
+
+input {
+  /*outlook*/
+  background-color: black;
+  border: none;
+  outline: none;
+  width: 100%;
+  /*content*/
+  color:white;
+  font-size: 1rem;
+  font-family: "Nunito", sans-serif;
+}
+
+td {
+  /*outlook*/
+  width: 100%;
+  height: 40px;
+  padding: 0 20px;
+  border-bottom: 1px dashed #333333;
+    /*content*/
+  text-align: left;
+}
+.fa-plus {
+  color: #4ddb00;
+}
+
+.fa-times {
+  color: #ff3b00;
+}
+.fa-star{
+  color: #ffe100;
+}
+
+.fa-plus:hover, .fa-times:hover {
+  color: white;
+}
+
+.task-setting-button {
+  /*outlook*/
+  height: 6%;
+}
+
+.setting {
+  height: 40%;
+  border-top: 1px dashed #333333;
+  margin: 0 auto;
+  padding: 15px 0;
+}
+.setting-item {
+  padding: 7px 0;
+}
+.setting input {
+  border: 1px dashed #515151;
+  border-radius: 3px;
+  width: 50px;
+  margin: 0 3px;
+  padding: 3px 5px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.seek-bar {
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  
+}
+
+.seek-bar .fill {
+  background-color: white;
+  height: 0.25rem;
+  border-radius: 2px;
+}
+
+.seek-bar .thumb {
+  position: absolute;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: white;
+  left: 36%;
+  top: 50%;
+  /* #1 */
+  margin-left: -0.25rem;
+  margin-top: -0.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  transition: width 100ms ease-in-out, height 100ms ease-in-out, margin-top 100ms ease-in-out, margin-left 100ms ease-in-out;
+}
+
+.seek-bar:hover .thumb {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: -0.5rem;
+  margin-left: -0.5rem;
+}

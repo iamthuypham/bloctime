@@ -1,0 +1,43 @@
+.dashboard {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.control {
+  /*content*/
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  height: 50%;
+}
+
+.time-tracker {
+  /*content*/
+  font-size: 6rem;
+}
+
+.button {
+  /*position*/
+  display: inline-block;
+  margin-top: 5%;
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+  white-space: nowrap;
+  /*outlook*/
+  border-radius: 50%;
+  border: 5px solid #b4e599;
+  background-color: #4ddb00;
+  /*content*/
+  font-size: 3rem;
+  color: white;
+}
+
+/*red class added when clicked*/
+.red {
+  border-color: #ef957a;
+  background-color: #ff3b00;
+}
